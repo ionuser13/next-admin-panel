@@ -1,16 +1,38 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { LockClosedIcon } from '@heroicons/react/solid';
+import Router from 'next/router';
+import { useAuth } from '@hooks/useAuth';
 
 export default function LoginPage() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const [errorLogin, setErrorLogin] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const auth = useAuth();
 
   const submitHandle = (e) => {
     e.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-    // console.log(email, password)
+    setErrorLogin(null);
+    setLoading(true);
+    auth
+      .signin(email, password)
+      .then(() => {
+        console.log('successful login');
+        Router.push({ pathname: '/dashboard' });
+      })
+      .catch(function (error) {
+        if (error.response?.status === 401) {
+          setErrorLogin('Wrong username or password');
+        } else if (error.response) {
+          setErrorLogin('We have a problem.');
+        } else {
+          setErrorLogin('Something went wrong.');
+        }
+        setLoading(false);
+      });
   };
 
   return (
@@ -22,6 +44,17 @@ export default function LoginPage() {
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
           </div>
           <form className="mt-8 space-y-6" onSubmit={submitHandle}>
+            {errorLogin && (
+              <div className="p-3 mb-3 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+                <span className="font-medium">Error!</span> {errorLogin}
+              </div>
+            )}
+            {loading && (
+              <span className="flex absolute h-4 w-4 top-0 right-0 -mt-1 -mr-1">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-300 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-4 w-4 bg-indigo-400"></span>
+              </span>
+            )}
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
@@ -75,6 +108,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                disabled={loading}
               >
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                   <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />

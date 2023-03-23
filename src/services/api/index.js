@@ -23,14 +23,14 @@ const endPoints = {
   categories: {
     getCategories: (limit) => `${API}/api/${VERSION}/categories?limit=${limit}`,
     getCategory: (id) => `${API}/api/${VERSION}/categories/${id}`,
-    postCategories: `${API}/api/${VERSION}/categories`,
+    postCategories: `${API}/api/${VERSION}/categories/`,
     putCategory: (id) => `${API}/api/${VERSION}/categories/${id}`,
     deleteCategory: (id) => `${API}/api/${VERSION}/categories/${id}`,
-    getProductsFromCategory: (id) => `${API}/api/${VERSION}/categories/${id}/products`,
+    getProductsFromCategory: (id) => `${API}/api/${VERSION}/categories/${id}/products/`,
   },
   files: {
     getFilen: (filename) => `${API}/api/${VERSION}/files/${filename}`,
-    postFile: `${API}/api/${VERSION}/files/upload`,
+    postFile: `${API}/api/${VERSION}/files/upload/`,
   },
 };
 
