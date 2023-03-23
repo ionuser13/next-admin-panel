@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { useAuth } from '@hooks/useAuth';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
 
 const userData = {
@@ -23,6 +24,12 @@ function classNames(...classes) {
 }
 
 export default function Header() {
+  const auth = useAuth();
+  const userData = {
+    name: auth?.user,
+    email: auth?.user?.email,
+    imageUrl: auth?.user?.avatar,
+  };
   return (
     <>
       <Disclosure as="nav" className="bg-gray-800">
