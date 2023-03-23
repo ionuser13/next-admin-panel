@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import Link from 'next/link';
 import { LockClosedIcon } from '@heroicons/react/solid';
 
 export default function LoginPage() {
@@ -10,7 +11,7 @@ export default function LoginPage() {
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     // console.log(email, password)
-  }
+  };
 
   return (
     <>
@@ -64,9 +65,9 @@ export default function LoginPage() {
               </div>
 
               <div className="text-sm">
-                <a href="/" className="font-medium text-indigo-600 hover:text-indigo-500">
+                <Link href="/" className="font-medium text-indigo-600 hover:text-indigo-500">
                   Forgot your password?
-                </a>
+                </Link>
               </div>
             </div>
 
