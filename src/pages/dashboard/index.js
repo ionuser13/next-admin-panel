@@ -1,5 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
+import useFetch from '@hooks/useFetch';
+import endPoints from '@services/api';
+
 const people = [
   {
     name: 'Jane Cooper',
@@ -11,7 +14,10 @@ const people = [
   },
 ];
 
+
 export default function Dashboard() {
+  const products = useFetch(endPoints.products.getProducts(5, 5));
+  console.log(products)
   return (
     <>
       <div className="flex flex-col">

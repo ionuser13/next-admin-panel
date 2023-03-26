@@ -24,12 +24,12 @@ function useProviderAuth() {
       },
     };
     const { data: access_token } = await axios.post(endPoints.auth.login, { email, password }, options);
-    if (access_token) {
+    if(access_token) {
       const token = access_token.access_token;
       Cookies.set('token', token, { expires: 5 });
       axios.defaults.headers.Authorization = `Bearer ${token}`; //sends information to replace the default value with the token, so we can send this in the query
       const { data: user } = await axios.get(endPoints.auth.profile); // to be able to show the user
-      setUser(user); //keeps the user info across the app
+      setUser(user);//keeps the user info across the app
     }
   };
   return {
