@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import useFetch from '@hooks/useFetch';
 import endPoints from '@services/api';
+import Paginate from '@components/Paginate';
 
 const PRODUCT_LIMIT = 5;
 const PRODUCT_OFFSET = 5;
@@ -19,10 +20,12 @@ const people = [
 
 
 export default function Dashboard() {
-  const products = useFetch(endPoints.products.getProducts(PRODUCT_LIMIT, PRODUCT_OFFSET));
-  console.log(products)
+  const [productsOffset, setProductsOffset] = useState(0);
+  const products = useFetch(endPoints.products.getProducts(PRODUCT_LIMIT, productsOffset), productsOffset);
+  const totalProducts = useFetch(endPoints.products.getProducts(0, 0)).length;
   return (
     <>
+    {totalProducts > 0 && <Paginate totalProducts={totalProducts} productLimit={PRODUCT_LIMIT} setOffset={setProductsOffset} neighbourNumbers={3} />}
       <div className="flex flex-col">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
