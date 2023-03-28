@@ -13,7 +13,7 @@ const Paginate = ({ totalProducts, productLimit, setOffset, neighbourNumbers }) 
         key={`Paginador-${i}`}
         onClick={() => {
           setCurrent(i);
-          setOffset((i - 1) * itemsPerPage);
+          setOffset((i - 1) * totalPerPage);
         }}
         href="#"
         aria-current="page"

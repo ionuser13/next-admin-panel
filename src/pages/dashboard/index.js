@@ -3,29 +3,35 @@ import Link from 'next/link';
 import useFetch from '@hooks/useFetch';
 import endPoints from '@services/api';
 import Paginate from '@components/Paginate';
+import Chart from '@common/Chart';
 
-const PRODUCT_LIMIT = 5;
-const PRODUCT_OFFSET = 5;
-
-const people = [
-  {
-    name: 'Jane Cooper',
-    title: 'Regional Paradigm Technician',
-    department: 'Optimization',
-    role: 'Admin',
-    email: 'jane.cooper@example.com',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-  },
-];
-
+const PRODUCT_LIMIT = 15;
 
 export default function Dashboard() {
   const [productsOffset, setProductsOffset] = useState(0);
   const products = useFetch(endPoints.products.getProducts(PRODUCT_LIMIT, productsOffset), productsOffset);
   const totalProducts = useFetch(endPoints.products.getProducts(0, 0)).length;
+
+  const categoryNames = products?.map((product) => product.category);
+  //extract categories names with their elements, those that mathched inside the products
+  const categoryCount = categoryNames?.map((category) => category.name);
+  //counted the names of the categories
+  const countOcurrences = (arr) => arr.reduce((prev, curr) =>((prev[curr] = ++prev[curr] || 1), prev), {});
+  //use reduce to iterate into each one and extract the categories and sum the values to have the number of ocurrences in categoryCount
+  const data = {
+    datasets: [
+      {
+        label: 'Categories',
+        data: countOcurrences(categoryCount),
+        borderWidth: 2,
+        backgroundColor: ['#ffbb11', '#c0c0c0', '#50AF95', '#f3ba2f', '#2a71d0'],
+      },
+    ],
+  };
   return (
     <>
-    {totalProducts > 0 && <Paginate totalProducts={totalProducts} productLimit={PRODUCT_LIMIT} setOffset={setProductsOffset} neighbourNumbers={3} />}
+      <Chart className="mb-8 mt-2" chartData={data} />
+      {totalProducts > 0 && <Paginate totalProducts={totalProducts} productLimit={PRODUCT_LIMIT} setOffset={setProductsOffset} neighbourNumbers={3} />}
       <div className="flex flex-col">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
