@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { addProduct } from "@services/api/product";
 
 export default function FormProduct() {
     function checkData(data) {
@@ -32,7 +33,14 @@ export default function FormProduct() {
             categoryId: parseInt(formData.get('category')),
             images: [formData.get('images').name],
           };
-        console.log(checkData(data) ? console.log(data) : "check your inputs")
+          if(checkData(data)) {
+            addProduct(data)
+              .then((response) => {
+                console.log(response)
+              })
+          } else {
+            console.log('check yout inputs')
+          }
     }
     return (
         <form ref={formRef} onSubmit={handleSubmit}>
