@@ -1,14 +1,34 @@
-import { Fragment, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { PlusIcon } from '@heroicons/react/solid';
 import Modal from '@common/Modal';
 import FormProduct from '@components/FormProduct';
+import endPoints from '@services/api';
+import Link from 'next/link';
+import axios from 'axios';
+import Alert from '@common/Alert';
+import useAlerts from '@hooks/useAlert';
 
-export default function Product() {
+export default function Products() {
   const [open, setOpen] = useState(false);
   const [products, setProducts] = useState([]);
+  const { alert, setAlert, toggleAlert } = useAlerts()
+
+  useEffect(() => {
+    async function loadProducts() {
+      const response = await axios.get(endPoints.products.getProductsAll);
+      setProducts(response.data)
+    }
+    try {
+      loadProducts()
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }, [alert])
 
   return (
     <>
+      <Alert alert={alert} handleClose={toggleAlert}/>
       <div className="lg:flex lg:items-center lg:justify-between mb-8">
         <div className="min-w-0 flex-1">
           <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">List of products</h2>
@@ -92,7 +112,7 @@ export default function Product() {
         </div>
       </div>
       <Modal open={open} setOpen={setOpen}>
-        <FormProduct />
+        <FormProduct setOpen={setOpen} setAlert={setAlert} />
       </Modal>
     </>
   );
