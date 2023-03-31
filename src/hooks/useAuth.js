@@ -32,8 +32,17 @@ function useProviderAuth() {
       setUser(user);//keeps the user info across the app
     }
   };
+
+  const logout = () => {
+    Cookies.remove('token');
+    setUser(null);
+    delete axios.defaults.headers.authorization;
+    window.location.href = '/login';
+  }
+
   return {
     user,
     signin,
+    logout,
   };
 }

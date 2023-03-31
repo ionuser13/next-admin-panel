@@ -38,8 +38,7 @@ export default function FormProduct({ setOpen, setAlert, product }) {
     };
 
     if (product) {
-      // console.log(data)
-      updateProduct(product.id, data).then((response) => {
+      updateProduct(product.id, data).then(() => {
         router.push('dashboard/products/')
       })
     } else {
