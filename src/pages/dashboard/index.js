@@ -8,6 +8,7 @@ import Chart from '@common/Chart';
 const PRODUCT_LIMIT = 15;
 
 export default function Dashboard() {
+
   const [productsOffset, setProductsOffset] = useState(0);
   const products = useFetch(endPoints.products.getProducts(PRODUCT_LIMIT, productsOffset), productsOffset);
   const totalProducts = useFetch(endPoints.products.getProducts(0, 0)).length;
