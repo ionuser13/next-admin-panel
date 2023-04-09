@@ -28,13 +28,13 @@ export default function Edit() {
   }, [router?.isReady]);
   return notFound ? (
     <>
-    <Head>
-      <meta name="description" content="Edit your product" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <link rel="icon" href="/favicon.ico" />
-      <title>Product not found</title>
-    </Head>
-    <div>Product not Found</div>
+      <Head>
+        <meta name="description" content="Edit your product" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+        <title>Product not found</title>
+      </Head>
+      <div>Product not Found</div>
     </>
   ) : (
     <>
