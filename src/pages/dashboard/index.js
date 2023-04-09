@@ -35,7 +35,6 @@ export default function Dashboard() {
         <title>Dashboard</title>
         <meta name="description" content="Dashboard panel to create, edit and delete products. Made with Next JS and Tailwind UI by John Chacpi." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Chart className="mb-8 mt-2" chartData={data} />
       {totalProducts > 0 && <Paginate totalProducts={totalProducts} productLimit={PRODUCT_LIMIT} setOffset={setProductsOffset} neighbourNumbers={3} />}

@@ -8,7 +8,7 @@ export default function Home() {
         <title>Next Dashboard</title>
         <meta name="description" content="Dashboard panel to create, edit and delete products. Made with Next JS and Tailwind UI by John Chacpi." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/public/favicon.ico" />
       </Head>
       <div className="bg-white">
         <div className="relative isolate px-6 pt-14 lg:px-8">

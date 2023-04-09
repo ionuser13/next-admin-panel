@@ -52,7 +52,6 @@ export default function Products() {
       <Head>
         <meta name="description" content="Find any product in this product panel" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
         <title>Product List</title>
       </Head>
       <Alert alert={alert} handleClose={toggleAlert} />
