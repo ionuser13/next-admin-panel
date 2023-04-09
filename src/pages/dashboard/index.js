@@ -8,7 +8,6 @@ import Chart from '@common/Chart';
 const PRODUCT_LIMIT = 15;
 
 export default function Dashboard() {
-
   const [productsOffset, setProductsOffset] = useState(0);
   const products = useFetch(endPoints.products.getProducts(PRODUCT_LIMIT, productsOffset), productsOffset);
   const totalProducts = useFetch(endPoints.products.getProducts(0, 0)).length;
@@ -17,7 +16,7 @@ export default function Dashboard() {
   //extract categories names with their elements, those that mathched inside the products
   const categoryCount = categoryNames?.map((category) => category.name);
   //counted the names of the categories
-  const countOcurrences = (arr) => arr.reduce((prev, curr) =>((prev[curr] = ++prev[curr] || 1), prev), {});
+  const countOcurrences = (arr) => arr.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), {});
   //use reduce to iterate into each one and extract the categories and sum the values to have the number of ocurrences in categoryCount
   const data = {
     datasets: [

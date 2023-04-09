@@ -13,12 +13,12 @@ const useAlerts = (options) => {
   });
   const toggleAlert = () => {
     setAlert(!alert.active);
-  }
+  };
   return {
     alert,
     setAlert,
     toggleAlert,
-    } 
+  };
 };
 
-export default useAlerts
+export default useAlerts;

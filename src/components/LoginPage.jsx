@@ -9,7 +9,7 @@ export default function LoginPage() {
   const passwordRef = useRef(null);
   const [errorLogin, setErrorLogin] = useState(null);
   const [loading, setLoading] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
   const auth = useAuth();
 
   const submitHandle = (e) => {

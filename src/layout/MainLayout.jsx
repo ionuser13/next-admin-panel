@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 export default function MainLayout({ children }) {
   const router = useRouter();
-  if(router.pathname === '/') {
+  if (router.pathname === '/') {
     return (
       <>
         <div className="min-h-full">
@@ -16,8 +16,7 @@ export default function MainLayout({ children }) {
         </div>
       </>
     );
-  }
-  else {
+  } else {
     return (
       <>
         <div className="min-h-full">
@@ -30,5 +29,4 @@ export default function MainLayout({ children }) {
       </>
     );
   }
-  
 }

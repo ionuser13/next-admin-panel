@@ -12,15 +12,15 @@ const Chart = ({ chartData }) => {
         options={{
           plugins: {
             title: {
-                display: true,
-                text: 'Category',
-                fontSize: 20,
-              },
-              legend: {
-                display: true,
-                position: 'right',
-              },
-          }
+              display: true,
+              text: 'Category',
+              fontSize: 20,
+            },
+            legend: {
+              display: true,
+              position: 'right',
+            },
+          },
         }}
       />
     </>

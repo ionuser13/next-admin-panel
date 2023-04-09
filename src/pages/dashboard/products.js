@@ -12,24 +12,23 @@ import { deleteProduct } from '@services/api/product';
 export default function Products() {
   const [open, setOpen] = useState(false);
   const [products, setProducts] = useState([]);
-  const { alert, setAlert, toggleAlert } = useAlerts()
+  const { alert, setAlert, toggleAlert } = useAlerts();
 
   useEffect(() => {
     async function loadProducts() {
       const response = await axios.get(endPoints.products.getProductsAll);
-      setProducts(response.data)
+      setProducts(response.data);
     }
     try {
-      loadProducts()
-    }
-    catch (error) {
-      console.log(error)
+      loadProducts();
+    } catch (error) {
+      console.log(error);
     }
   }, [alert]);
 
   const handleDelete = (id) => {
     deleteProduct(id)
-      .then(()=>{
+      .then(() => {
         setAlert({
           active: true,
           message: 'Product deleted successfully',
@@ -39,17 +38,17 @@ export default function Products() {
       })
       .catch((error) => {
         setAlert({
-            active: true,
-            message: error.message,
-            type: "error",
-            autoClose: false,
+          active: true,
+          message: error.message,
+          type: 'error',
+          autoClose: false,
         });
-    });
-  }
+      });
+  };
 
   return (
     <>
-      <Alert alert={alert} handleClose={toggleAlert}/>
+      <Alert alert={alert} handleClose={toggleAlert} />
       <div className="lg:flex lg:items-center lg:justify-between mb-8">
         <div className="min-w-0 flex-1">
           <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">List of products</h2>
@@ -120,7 +119,7 @@ export default function Products() {
                         </Link>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <XCircleIcon className='flex-shrink-0 h-6 w-6 text-gray-400 cursor-pointer' aria-hidden="true" onClick={() => handleDelete(product.id)}/>
+                        <XCircleIcon className="flex-shrink-0 h-6 w-6 text-gray-400 cursor-pointer" aria-hidden="true" onClick={() => handleDelete(product.id)} />
                       </td>
                     </tr>
                   ))}
