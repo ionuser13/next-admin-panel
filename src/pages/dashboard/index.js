@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Head from 'next/head';
 import Link from 'next/link';
 import useFetch from '@hooks/useFetch';
 import endPoints from '@services/api';
@@ -30,6 +31,12 @@ export default function Dashboard() {
   };
   return (
     <>
+      <Head>
+        <title>Dashboard</title>
+        <meta name="description" content="Dashboard panel to create, edit and delete products. Made with Next JS and Tailwind UI by John Chacpi." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Chart className="mb-8 mt-2" chartData={data} />
       {totalProducts > 0 && <Paginate totalProducts={totalProducts} productLimit={PRODUCT_LIMIT} setOffset={setProductsOffset} neighbourNumbers={3} />}
       <div className="flex flex-col">
@@ -51,11 +58,9 @@ export default function Dashboard() {
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Id
                     </th>
-                    <th scope="col" className="relative px-6 py-3">
-                      <span className="sr-only">Edit</span>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     </th>
-                    <th scope="col" className="relative px-6 py-3">
-                      <span className="sr-only">Delete</span>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     </th>
                   </tr>
                 </thead>
@@ -80,13 +85,8 @@ export default function Dashboard() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.id}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <Link href="/" className="text-indigo-600 hover:text-indigo-900">
+                        <Link href={`/dashboard/edit/${product.id}`} className="text-indigo-600 hover:text-indigo-900">
                           Edit
-                        </Link>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <Link href="/" className="text-indigo-600 hover:text-indigo-900">
-                          Delete
                         </Link>
                       </td>
                     </tr>
