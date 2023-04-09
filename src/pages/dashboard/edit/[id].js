@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Head from 'next/head';
 import FormProduct from '@components/FormProduct';
 import { useRouter } from 'next/router';
 import endPoints from '@services/api';
@@ -25,5 +26,25 @@ export default function Edit() {
     getProduct();
     console.log(id);
   }, [router?.isReady]);
-  return notFound ? <div>Product not Found</div> : <FormProduct product={product} />;
+  return notFound ? (
+    <>
+    <Head>
+      <meta name="description" content="Edit your product" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="icon" href="/favicon.ico" />
+      <title>Product not found</title>
+    </Head>
+    <div>Product not Found</div>
+    </>
+  ) : (
+    <>
+      <Head>
+        <meta name="description" content="Edit your product" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+        <title>Editing {product.title}</title>
+      </Head>
+      <FormProduct product={product} />
+    </>
+  );
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { PlusIcon, XCircleIcon } from '@heroicons/react/solid';
+import Head from 'next/head';
 import Modal from '@common/Modal';
 import FormProduct from '@components/FormProduct';
 import endPoints from '@services/api';
@@ -48,6 +49,12 @@ export default function Products() {
 
   return (
     <>
+      <Head>
+        <meta name="description" content="Find any product in this product panel" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+        <title>Product List</title>
+      </Head>
       <Alert alert={alert} handleClose={toggleAlert} />
       <div className="lg:flex lg:items-center lg:justify-between mb-8">
         <div className="min-w-0 flex-1">
